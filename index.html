@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title>Portfolio</title>
+
+		<link rel="stylesheet" href="style.css">
+		
+		<style>
+			* { box-sizing: border-box; margin: 0; padding: 0; }
+
+			body {
+				font-family: "Poppins", sans-serif;
+				background-color: black;
+				color: white;
+				overflow-x: hidden; 
+				min-height: 100vh;
+			}
+
+			.menu-icon {
+				width: 35px; 
+				height: 25px;
+				cursor: pointer;
+				position: fixed;
+				top: 25px;
+				right: 30px;
+				z-index: 100;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+
+			.menu-icon span {
+				display: block;
+				height: 3px;
+				background: white;
+				border-radius: 2px;
+				transition: all 0.4s ease;
+			}
+		
+			.menu-icon.open span:nth-child(1) {
+				transform: translateY(11px) rotate(45deg);
+			}
+
+			.menu-icon.open span:nth-child(2) {
+				opacity: 0;
+			}
+
+			.menu-icon.open span:nth-child(3) {
+				transform: translateY(-11px) rotate(-45deg);
+			}
+
+			.side-menu {
+				position: fixed;
+				right: -300px;
+				top: 0; 
+				width: 250px;
+				height: 100vh;
+				background: rgba(20, 20, 20, 0.97);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transition: right 0.5s ease, opacity 0.5s ease;
+				opacity: 0; 
+			}
+
+			.side-menu.open {
+				right: 0;
+				opacity: 1;
+			}
+
+			.side-menu ul { list-style: none; text-align: center; }
+
+			.side-menu li { margin: 20px 0; }
+
+			.side-menu a {
+				text-decoration: none;
+				color: white;
+				font-size: 1.2rem;
+				letter-spacing: 1px;
+				transition: color 0.3s ease;
+			}
+
+			.side-menu a:hover { color: #00bfff; }
+
+			.logo-home {
+				width: 400px;
+				display: block;
+				margin: 0 auto 20px auto;
+			}
+
+			.logo-small {
+				width: 80px;
+				position: absolute;
+				top: 20px;
+				left: 25px;
+			}
+
+			#content {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				text-align: center;
+				transition: opacity 0.4s ease;
+				padding: 40px;
+			}
+			
+			h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+			h3 { font-size: 1.5rem; margin-bottom: 15px; }
+			
+			p { max-width: 600px; margin: auto; line-height: 1.5; }
+
+			.side-menu.open {
+				right: 0;
+				opacity: 1;
+			}
+
+			.side-menu ul {
+				list-style: none;
+				text-align: center
+			}
+
+			.side-menu li {
+				margin: 20px 0;
+			}
+
+			.side-menu a:hover {
+				color: #00bfff;
+			}
+
+			.hidden { display: none; }
+
+			.about-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 40px;
+				margin-top: 40px;
+				flex-wrap: wrap;
+			}
+
+			.professional-photo {
+				width: 300px;
+				border-radius: 12px;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			.professional-photo:hover {
+				transform: scale(1.05);
+				box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+			}
+
+			.about-container p {
+				max-width: 500px;
+				font-size: 1.1rem;
+				line-height: 1.6;
+				text-align: left;
+			}
+
+			@media (max-width: 768px) {
+				.about-container {
+					flex-direction: column;
+					text-align: center;
+				}
+			}
+
+			.about-container p {
+				text-align: center;
+			}
+
+			.video-stack {
+				position: relative;
+				width: 600px;
+				height: 500px;
+				margin: 40px auto;
+			}
+
+			.video-item {
+				position: absolute;
+				top: 0;
+				left: 0;
+				border-radius: 10px;
+				cursor: pointer;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+				width: 100%;
+				max-width: 450px;
+			}
+
+			#vid1 { top: 0; left: 0; z-index: 1; }
+			#vid2 { top: 40px; left: 40px; z-index: 2; }
+			#vid3 { top: 80px; left: 80px; z-index: 3; }
+			#vid4 { top: 120px; left: 120px; z-index: 4; }	
+
+			.video-item:hover {
+				transform: scale(1.03);
+				box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+			}
+
+			.video-item.active {
+				transform: scale(1.15) translateY(-20px);
+				box-shadow: 0 0 40px rgba(0, 191, 255, 0.8);
+				z-index: 20;
+				transition: all 0.4s ease;
+			}
+
+			@media (max-width: 768px) {
+				.video-stack {
+					width: 90%;
+					height: auto;
+				}
+
+				.video-item { 
+					position: static;
+					width: 100%;
+					margin: 15px 0;
+				}
+			}
+
+			html, body {
+				touch-action: manipulation;
+			}
+
+			.contact-intro {
+				margin: 20px auto;
+				max-width: 600px;
+				font-size: 1.1rem;
+				line-height: 1.6;
+			}
+
+			.contact-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 15px;
+				margin-top: 30px;
+			}
+
+			.contact-item {
+				font-size: 1.2rem;
+			}
+
+			.contact-item a {
+				color: #00bfff;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.contact-item a:hover {
+				color: white;
+			}
+
+			.contact-photo {
+				margin-top: 40px; 
+				width: 250px; 
+				border-radius: 12px;
+				box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+			}
+
+			@media (max-width: 768px) {
+				.contact-photo {
+					width: 180px;
+				}
+			}
+
+			.contact-item {
+				opacity: 0;
+				transform: translateY(20px);
+				animation: fadeUp 0.8s ease fowards;
+			}
+
+			.contact-item:nth-child(1) { animation-delay: 0.2s; }
+			.contact-item:nth-child(2) { animation-delay: 0.4s; }
+			.contact-item:nth-child(3) { animation-delay: 0.6s; }
+			.contact-item:nth-child(4) { animation-delay: 0.8s; }
+
+			@keyframes fadeUp {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+		</style>
+
+	</head>
+
+<body>
+	<div class="menu-icon" id="menuIcon">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<nav class="side-menu" id="sideMenu">
+		<ul>
+			<li><a href="#" data-section="home">Home</a></li>
+			<li><a href="#" data-section="about">About Me</a></li>
+			<li><a href="#" data-section="works">Sample Works</a></li>
+			<li><a href="#" data-section="contact">Contact Information</a></li>
+		</ul>
+	</nav>
+
+	<div id="content">
+		<div id="home">
+			<h3>Welcome to</h3>
+			<h1>MBEEZY MEDIA</h1>
+			<p>Click the menu icon to explore!</p> <br>
+			<img src="logo.jpg" alt="MBEEZY MEDIA Logo" class="logo-home">
+		</div>
+
+		<div id="about" class="hidden">
+			<img src="logo.jpg" alt="Logo" class="logo-small">
+			<h1> About Me</h1>
+	
+			<div class="about-container">
+				<img src="Headshot.jpg" alt="Professional Photo" class="professional-photo">
+				<p>
+					What's up! I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
+				</p>
+			</div>
+		</div>
+
+		<div id="works" class="hidden">
+			<img src="logo.jpg" alt="Logo" class="logo-small">
+			<h1>Sample Works</h1>
+			<p>
+				Here are a few examples of my recent projects. Click a video to bring it to the front and play!
+			</p>
+	
+			<div class="video-stack">
+				<video id="vid1" class="video-item" src="homie-hangout.mov" width="450" height="300" onclick="bringToTop('vid1')" muted></video>
+
+				<video id="vid2" class="video-item" src="45e516e8f1d5472e8c976008995bfcbc.mov" width="450" height="300" onclick="bringToTop('vid2')" muted></video>
+
+				<video id="vid3" class="video-item" src="nike-ad.mp4" width="450" height="300" onclick="bringToTop('vid3')" muted></video>
+
+				<video id="vid4" class="video-item" src="reagans.mp4" width="450" height="300" onclick="bringToTop('vid4')" muted></video>
+
+			</div>
+		</div>
+
+		<div id="contact" class="hidden">
+			<img src="logo.jpg" alt="Logo" class="logo-small">
+			<h1>Get in touch</h1>
+			<p>
+				Let's collaborate! Any questions?
+				<!-- <a href="https://mbeezymedia.square.site">Booking Site</a> -->
+			</p>
+
+			<div class="contact-container">
+				<div class="contact-item">
+					📧 <a href="mailto:mbeezymedia@gmail.com">mbeezymedia@gmail.com</a>
+				</div>
+				
+				<div class="contact-item">
+					📱 <a href="tel:+14328022324">(432) 802 - 2324</a>
+				</div>
+
+				<div class="contact-item">
+					<p>Want to book?</p>
+					💻 <a href="https://mbeezymedia.square.site" target="_blank">Booking Site</a>
+				</div>
+		</div>
+	</div>
+
+	<script>	
+		const menuIcon = document.getElementById("menuIcon");
+		const sideMenu = document.getElementById("sideMenu");
+		const content = document.getElementById("content");
+		const sections = document.querySelectorAll("#content > div")
+
+		menuIcon.addEventListener("click", () => {
+			menuIcon.classList.toggle("open");
+			sideMenu.classList.toggle("open");
+		});
+
+		document.querySelectorAll(".side-menu a").forEach(link => {
+			link.addEventListener("click", e => {
+				e.preventDefault();
+				const target = link.getAttribute("data-section");
+
+				content.style.opacity = 0;
+				setTimeout(() => {
+					sections.forEach(sec => sec.classList.add("hidden"));
+					document.getElementById(target).classList.remove("hidden");
+
+					content.style.opacity = 1;
+
+					sideMenu.classList.remove("open");
+					menuIcon.classList.remove("open");
+				}, 400);
+			});
+		});
+
+		let topVideo = "vid4";
+
+		function bringToTop(newTop) {
+			const prev = document.getElementById(topVideo);
+			const next = document.getElementById(newTop);
+
+			if (prev) {
+				prev.classList.remove("active");
+				prev.style.zIndex = "1";
+				prev.pause();
+				prev.currentTime = 0;
+				prev.muted = true;
+			}
+
+			next.classList.add("active");
+			next.style.zIndex = "10";
+			next.muted = false;
+			next.play();
+
+			document.querySelectorAll(".video-item").forEach(v => {
+				if (v.id !== newTop) {
+					v.pause();
+					v.muted = true;
+					v.classList.remove("active");
+				}
+			});
+
+			topVideo = newTop;
+		}
+
+		document.querySelector("[data-section='contact']").addEventListener("click", () => {
+			setTimeout(() => {
+				const items = document.querySelectorAll(".contact-item, .contact-photo");
+				items.forEach(item => {
+					item.style.animation = "none";
+					void item.offsetHeight;
+					item.style.animation = "";
+				});
+			}, 400);
+		});
+
+	</script>
+
+</body>
+</html>
