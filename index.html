@@ -19,6 +19,8 @@
 				min-height: 100vh;
 			}
 
+			.hidden { display: none !important; }
+
 			.menu-icon {
 				width: 35px; 
 				height: 25px;
@@ -54,6 +56,7 @@
 
 			.side-menu {
 				position: fixed;
+				z-index: 9999;
 				right: -300px;
 				top: 0; 
 				width: 250px;
@@ -86,6 +89,12 @@
 
 			.side-menu a:hover { color: #00bfff; }
 
+			#content {
+				min-height: 100vh;
+				padding: 80px 20px 60px 20px;
+				text-align: center;
+			}
+
 			.logo-home {
 				width: 400px;
 				display: block;
@@ -99,42 +108,7 @@
 				left: 25px;
 			}
 
-			#content {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 100vh;
-				text-align: center;
-				transition: opacity 0.4s ease;
-				padding: 80px 20px 60px 20px;
-				scroll-behavior: smooth;
-			}
-			
-			h1 { font-size: 2.5rem; margin-bottom: 10px; }
-
-			h3 { font-size: 1.5rem; margin-bottom: 15px; }
-			
-			p { max-width: 600px; margin: auto; line-height: 1.5; }
-
-			.side-menu.open {
-				right: 0;
-				opacity: 1;
-			}
-
-			.side-menu ul {
-				list-style: none;
-				text-align: center
-			}
-
-			.side-menu li {
-				margin: 20px 0;
-			}
-
-			.side-menu a:hover {
-				color: #00bfff;
-			}
-
-			.hidden { display: none; }
+			.logo-small:hover { opacity: 0.7; }
 
 			.about-container {
 				display: flex;
@@ -159,324 +133,226 @@
 
 			.about-container p {
 				max-width: 500px;
-				font-size: 1.1rem;
-				line-height: 1.6;
+				/* font-size: 1.1rem;
+				line-height: 1.6; */
 				text-align: left;
 			}
 
-			@media (max-width: 768px) {
-				.about-container {
-					flex-direction: column;
-					text-align: center;
-				}
-			}
-
-			.about-container p {
+			.folder-wrapper {
+				display: flex;
+				justify-content: center;
+				gap: 70px;
 				text-align: center;
+				margin-top: 50px;
 			}
 
-			.video-stack {
+			.folder-set {
+				cursor: pointer;
+				transition: transform .25s ease, box-shadow .25s ease;
+			}
+
+			.folder-set:hover {
+				transform: translateY(-6px);
+				box-shadow: 0 0 20px rgba(255,255,255,0.25);
+			}
+	
+			.folder-icon {
+				width: 150px;
+				height: 150px;
+				background: white;
+				border-radius: 30px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding-top: 10px;
+				margin: 0 auto;
+			}
+
+			.folder-shape {
+				width: 90px;
+				height: 60px;
+				background: #3a3a3a; /* dark gray folder */
+				border-radius: 8px;
 				position: relative;
-				width: 600px;
-				height: 500px;
-				margin: 40px auto;
 			}
 
-			.video-item {
+			.folder-shape::before {
+				content: "";
+				position: absolute;
+				top: -15px;
+				left: 0;
+				width: 45px;
+				height: 20px;
+				background: #3a3a3a;
+				border-radius: 6px 6px 0 0;
+			}
+	
+			.folder-shape::after {
+				content: "";
+				position: absolute;
+				top: 18px;
+				left: 10px;
+				width: 70px;
+				height: 4px;
+				background: white;
+				border-radius: 2px;
+			}
+
+			.folder-label {
+				margin-top: 12px;
+				font-size: 1.1rem;
+				font-weight: 600;
+				color: white;
+			}
+
+			.category-section {
+				margin-top: 40px;
+			}
+
+			.back-btn {
+				background: none;
+				border: 2px solid white;
+				padding: 8px 16px;
+				color: white;
+				cursor: pointer;
+				margin-bottom: 20px;
+			}
+
+			.project-slider {
+				position: relative;
+				width: 100%;
+				max-width: 100%;
+				height: 80vh;
+				margin: 40px auto 0 auto;
+				overflow: hidden;
+				border-radius: 12px;
+			}
+
+			.project-slide {
 				position: absolute;
 				top: 0;
 				left: 0;
-				border-radius: 10px;
-				cursor: pointer;
-				transition: transform 0.3s ease, box-shadow 0.3s ease;
-				box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 				width: 100%;
-				max-width: 450px;
-			}
-
-			#vid1 { top: 0; left: 0; z-index: 1; }
-			#vid2 { top: 40px; left: 40px; z-index: 2; }
-			#vid3 { top: 80px; left: 80px; z-index: 3; }
-			#vid4 { top: 120px; left: 120px; z-index: 4; }	
-
-			.video-item:hover {
-				transform: scale(1.03);
-				box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
-			}
-
-			.video-item.active {
-				transform: scale(1.15) translateY(-20px);
-				box-shadow: 0 0 40px rgba(0, 191, 255, 0.8);
-				z-index: 20;
-				transition: all 0.4s ease;
-			}
-
-			@media (max-width: 768px) {
-				.video-stack {
-					width: 90%;
-					height: auto;
-				}
-
-				.video-item { 
-					position: static;
-					width: 100%;
-					margin: 15px 0;
-				}
-			}
-
-			html, body {
-				/* touch-action: manipulation; */
 				height: 100%;
-				overflow-x: hidden;
-			}
-
-			#contact.show-anim .contact-item {
-				animation: fadeUp 0.8s ease forwards;
-			}
-
-			.contact-item:nth-child(1) { animation-delay: 0.2s; }
-			.contact-item:nth-child(2) { animation-delay: 0.4s; }
-			.contact-item:nth-child(3) { animation-delay: 0.6s; }
-			.contact-item:nth-child(4) { animation-delay: 0.8s; }
-
-			#contact .contact-photo {
 				opacity: 0;
-				transform: scale(0.9); 
+				transition: opacity .8s ease;
+				pointer-events: none;
 			}
 
-			#contact.show-anim .contact-photo {
-				animation: fadeInPhoto 1s ease forwards 1s;
+			.project-slide.active {
+				opacity: 1;
+				pointer-events: auto;
 			}
 
-			@keyframes fadeInPhoto {
-				to {
-					opacity: 1;
-					transform: scale(1);
-				}
+			.slide-img {
+				width: 100%;
+				height: 100%;
+				object-flit: cover;
+				filter: brightness(65%);
 			}
 
-			#contact .contact-item {
-				opacity: 0;
-				transform: translateY(20px);
+			.slide-title {
+				position: absolute;
+				bottom: 120px;
+				left: 40px;
+				font-size: 3rem;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				max-width: 80%;
+				text-align: left;
 			}
 
-			#contact.show-anim .contact-item {
-				animation: fadeUp 0.8s ease forwards;
+			.view-btn {
+				position: absolute;
+				bottom: 50px;
+				left: 40px;
+				padding: 10px 24px;
+				border: 2px solid white;
+				color: white;
+				text-decoration: none;
+				font-size: 1.2rem;
+				transition: 0.3s;
 			}
-	
-			#contact.show-anim .contact-item:nth-child(1) { animation-delay: 0.2s; }
-			#contact.show-anim .contact-item:nth-child(2) { animation-delay: 0.4s; }
-			#contact.show-anim .contact-item:nth-child(3) { animation-delay: 0.6s; }
-			#contact.show-anim .contact-item:nth-child(4) { animation-delay: 0.8s; }
+		
+			.view-btn:hover { background: white; color: black; }
 
-			#contact .contact-photo {
-				opacity: 0;
-				transform: scale(0.9);
-			}
-
-			#contact.show-anim .contact-photo {
-				animation: fadeInPhoto 1s ease forwards 1s;
-			}
-
-			@keyframes fadeUp {
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-
-			@keyframes fadeInPhoto {
-				to {
-					opacity: 1;
-					transform: scale(1);
-				}
-			}
-	
-			.logo-small {
-				position: fixed;
-				top: 16px;
-				left: 20px;
-				width: 70px;
-				z-index: 200;
+			.arrow {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				background: rgba(255,255,255,0.25);
+				border: none;
+				font-size: 2rem;
+				padding: 10px 14px;
+				cursor: pointer;
+				color: white;
+				transition: .3s;
 			}
 
-			.section {
-				padding-top: 110px;
-			}
-
-			#content {
-				align-items: flex-start; 
-				min-height: 100vh;
-				padding: 80px 20px 60px;    		
-				overflow-y: auto;           
-			}
-
-			.about-container p { text-align: left; }
-
-			.about-container { flex-wrap: nowrap; }
-
-			@media (max-height: 820px} {
-				h1 { font-size: 2.0rem; margin-bottom: 8px; }
-				h3 { font-size: 1.25rem; margin-bottom: 10px; }
-				p  { line-height: 1.5; }
-
-				.section { padding-top: 90px; }
-				#content { padding: 70px 16px 48px; }
-
-				.about-container { gap: 24px; }
-				.professional-photo { width: 260px; }
-
-				.video-stack {
-					width: 520px;
-					height: 430px;
-					margin-top: 24px;
-				}
-
-				.video-item { max-width: 420px; }
-
-				#vid1 { top: 0;    left: 0; }
-				#vid2 { top: 28px; left: 28px; }
-				#vid3 { top: 56px; left: 56px; }
-				#vid4 { top: 84px; left: 84px; }
-			}
-
-			@media (max-height: 700px) {
-				h1 { font-size: 1.8rem; }
-				.section { padding-top: 80px; }
-				.professional-photo { width: 230px; }
-				.video-stack { width: 480px; height: 380px; }
-				.video-item { max-width: 380px; }
-				#vid2 { top: 24px; left: 24px; }
-				#vid3 { top: 48px; left: 48px; }
-				#vid4 { top: 72px; left: 72px; }
-			}
-
-			@media (max-width: 900px) {
-				.about-container {
-					flex-wrap: wrap;
-					justify-content: center;
-				}
-				.about-container p { text-align: center; }
-				.video-stack { width: 95%; height: auto; }
-				.video-item {
-					position: static;
-					width: 100%;
-					max-width: 100%;
-					margin: 12px 0;
-				}
-			}
-
-			.contact-item, .contact-photo, .video-item { will-change: transform, opacity; }
-
-			@media (max-width: 900px) {
-				.about-container {
-					flex-direction: column !important;
-					flex-wrap: wrap !important;
-					align-items: center;
-				}
-				.about-container img.professional-photo {
-					width: 80%;
-					max-width: 300px;
-					margin-bottom: 20px;
-				}
-
-				.about-container p {
-					text-align: left !important;
-				}
-			}
-
-			@media (min-width: 901px) {
-				.video-item {
-					position: absolute;
-				}
-
-				#vid1 { top: 0; left: 0; z-index: 1; }
-				#vid2 { top: 40px; left: 40px; z-index: 2; }
-				#vid3 { top: 80px; left: 80px; z-index: 3; }
-				#vid4 { top: 120px; left: 120px; z-index: 4; }
-			}
-
-			@media (max-width: 900px) {
-				.video-stack {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					gap: 20px;
-					width: 95%;
-					margin: 0 auto;
-				}
-				.video-item {
-					position: static;
-					width: 100%;
-					max-width: 480px;
-					margin: 10px 0;
-				}
-			}
-
-			.section {
-  				padding-top: 110px;  
-  				min-height: 100vh;   
-  				box-sizing: border-box;
-			}
-
-			.video-section-wrapper {
-				background: #1a1a1a;
-				border: 2px solid #2b2b2b;
-				border-radius: 16px;
-				padding: 40px 30px;
-				margin: 40px auto;
-				width: fit-content;
-				max-width: 90%;
-				box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-			}
+			.arrow.left { left: 15px; }
+			.arrow.right { right: 15px; }
+			.arrow.hover { background: rgba(255, 255, 255, 0.5); }
 
 			.contact-wrapper {
 				position: relative;
-				width: 100%;
 				max-width: 900px;
-				margin: 0 auto;
+				margin: auto;
 				padding: 40px 20px;
+				min-height: 500px;
 			}
 
 			.contact-corner {
 				position: absolute;
-				width: 160px;
-				height: 160px;
-				border: 2px solid #2b2b2b;
+				width: 260px;
+				height: 260px; 
+				bottom: 100px;
+				right: 100px;
 				background: #1a1a1a;
-				border-radius: 12px;
+				border-radius: 20px;
+				border: 2px solid #2b2b2b;
 				overflow: hidden;
-				box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+				z-index: 999;
 			}
 
-			.contact-corner img {
-				width: 100%;
-				height 100%;
-				object-fit: cover;
-			}
-
-			.contact-corner.left { botton: 20px; left: 20px; }
-			.contact-corner.right { bottom: 20px; right: 20px; }
-
-			@media (max-width: 700px) {
-				.contact-corner { width: 120px; height: 120px; }
-			}
-
-			.side-menu {
+			.contact-corner.right {
 				position: fixed;
-				z-index: 9999;
+    bottom: 25px;
+    right: 25px;
+    width: 420px;
+    height: auto;
+    border-radius: 2px;
+    border: 2px solid #2b2b2b;
+    overflow: hidden;
+    background: #1a1a1a;
+    z-index: 9999; 
 			}
 
-			.menu-icon {
-				z-index: 10000;
+			.contact-corner.right img {
+				width: 100%;
+				height: auto%;
+				display: block;
 			}
 
-			.video-item {
-				pointer-events: auto;
-			}
 
-			.side-menu.open ~ #content .video-item {
-				pointer-events: none;
+
+			@media (max-width: 768px) {
+				.slide-title {
+					font-size: 2rem;
+					bottom: 100px;
+					left: 20px;
+				}
+
+				.view-btn {
+					bottom: 40px;
+					left: 20px;
+					font-size: 1rem;
+				}
+
+				.folder-wrapper {
+					flex-direction: column;
+					gap: 30px;
+				}
 			}
 
 		</style>
@@ -492,7 +368,6 @@
 
 	<nav class="side-menu" id="sideMenu">
 		<ul>
-			<li><a href="#" data-section="home">Home</a></li>
 			<li><a href="#" data-section="about">About Me</a></li>
 			<li><a href="#" data-section="works">Sample Works</a></li>
 			<li><a href="#" data-section="contact">Contact Information</a></li>
@@ -514,31 +389,83 @@
 			<div class="about-container">
 				<img src="Headshot.jpg" alt="Professional Photo" class="professional-photo">
 				<p>
-					What's up! I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
+					What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
 				</p>
 			</div>
 		</div>
 
-		<div id="works" class="hidden">
-			<img src="logo.jpg" alt="Logo" class="logo-small">
+		<div id="works" class="hidden section">
+			<img src="logo.jpg" class="logo-small">
 			<h1>Sample Works</h1>
 			<p>
-				Here are a few examples of my recent projects. Click a video to bring it to the front and play!
+				Here are a few examples of my recent projects. Click "View Project" to see more!
 			</p>
 
-			<div class="video-section-wrapper">
-				<div class="video-stack">
-					<video id="vid1" class="video-item" src="homie-hangout.mov" width="450" height="300" onclick="bringToTop('vid1')" muted></video>
-
-					<video id="vid2" class="video-item" src="45e516e8f1d5472e8c976008995bfcbc.mov" width="450" height="300" onclick="bringToTop('vid2')" muted></video>
-
-					<video id="vid3" class="video-item" src="nike-ad.mp4" width="450" height="300" onclick="bringToTop('vid3')" muted></video>
-
-					<video id="vid4" class="video-item" src="reagans.mp4" width="450" height="300" onclick="bringToTop('vid4')" muted></video>
+			<div id="folderSelection" class="folder-wrapper">
+				<div class="folder-set" onclick="openCategory('branded')">
+					<div class="folder-icon">
+						<div class="folder-shape"></div>
+					</div>
+					<div class="folder-label">Branded Projects</div>
 				</div>
 
+				<div class="folder-set" onclick="openCategory('personal')">
+					<div class="folder-icon">
+						<div class="folder-shape"></div>
+					</div>
+					<div class="folder-label">Personal Projects</div>
+				</div>
 			</div>
 
+			<div id="branded" class="hidden category-section">
+				<button class="back-btn" onclick="showFolders()">← Back to Folders</button>
+
+				<section class="project-slider">
+				<div class="project-slide active">
+					<img class="slide-img" src="nike thumbnail.png" alt="Branded Project 1">
+					<h1 class="slide-title">Nike Spec Ad</h1>
+					<a href="nike-ad.html" class="view-btn">View Project</a>
+				</div>
+
+				<div class="project-slide">
+					<img class="slide-img" src="adidas thumbnail.png" alt="Branded Project 2">
+					<h1 class="slide-title">Adidas Mock Ad</h1>
+					<a href="adidas_ad.html" class="view-btn">View Project</a>
+				</div>
+
+
+				<button class="arrow left" onclick="prevSlide()">❮</button>
+				<button class="arrow right" onclick="nextSlide()">❯</button>
+				</section>
+			</div>
+
+
+			<div id="personal" class="hidden category-section">
+				<button class="back-btn" onclick="showFolders()">← Back to Folders</button>
+				<section class="project-slider">
+					<div class="project-slide active">
+						<img class="slide-img" src="homie mov thumbnail.png" alt="Personal Project 1">
+						<h1 class="slide-title">Homie Hangout</h1>
+						<a href="homie_hangout1.html" class="view-btn">View Project</a>
+					</div>
+
+					<div class="project-slide">
+						<img class="slide-img" src="reagan's thumbnail.png" alt="Personal Project 2">
+						<h1 class="slide-title">Reagan’s Short Film</h1>
+						<a href="reagans_place.html" class="view-btn">View Project</a>
+					</div>
+
+					<div class="project-slide">
+						<img class="slide-img" src="homie hangout 2.png" alt="Personal Project 3">
+						<h1 class="slide-title">Homie Hangout BTS</h1>
+						<a href="homie_hangout2.html" class="view-btn">View Project</a>
+					</div>
+
+
+					<button class="arrow left" onclick="prevSlide()">❮</button>
+					<button class="arrow right" onclick="nextSlide()">❯</button>
+				</section>
+			</div>
 		</div>
 
 		<div id="contact" class="hidden">
@@ -546,16 +473,13 @@
 			<h1>Get in touch</h1>
 			
 			<div class="contact-wrapper">
-				<div class="contact-corner left">
-					<img src="collage.JPG" alt="Left side photo">
-				</div>
-
 				<div class="contact-corner right">
-					<img src="" alt="">
+					<img src="IMG_4044.JPG" alt="Contact collage">
 				</div>
 
-			<p class="contact-intro">
-				Let's collaborate! Any questions?
+
+			<p class="contact-info">
+				Any questions? Let's collaborate!
 			</p>
 
 			<div class="contact-container">
@@ -575,11 +499,10 @@
 		</div>
 	</div>
 
-	<script>	
+	<script>
 		const menuIcon = document.getElementById("menuIcon");
 		const sideMenu = document.getElementById("sideMenu");
-		const content = document.getElementById("content");
-		const sections = document.querySelectorAll("#content > div")
+		const sections = document.querySelectorAll("#content > div");
 
 		menuIcon.addEventListener("click", () => {
 			menuIcon.classList.toggle("open");
@@ -591,70 +514,78 @@
 				e.preventDefault();
 				const target = link.getAttribute("data-section");
 
-				content.style.opacity = 0;
+				sections.forEach(sec => sec.classList.add("hidden"));
+				document.getElementById(target).classList.remove("hidden");
 
-				setTimeout(() => {
-					sections.forEach(sec => sec.classList.add("hidden"));
-
-					stopAllVideos();
-					
-					const targetE1 = document.getElementById(target);
-					targetE1.classList.remove("hidden");
-
-					if (target === "contact") {
-						targetE1.classList.remove("show-anim");
-						void targetE1.offsetWidth;
-						targetE1.classList.add("show-anim");
-					}
-
-					content.style.opacity = 1;
-					sideMenu.classList.remove("open");
-					menuIcon.classList.remove("open");
-				}, 400);
+				sideMenu.classList.remove("open");
+				menuIcon.classList.remove("open");
 			});
 		});
 
+		document.querySelectorAll(".logo-small").forEach(logo => {
+			logo.addEventListener("click", () => {
+				sections.forEach(sec => sec.classList.add("hidden"));
+				document.getElementById("home").classList.remove("hidden");
 
-		let topVideo = "vid4";
-
-		function bringToTop(newTop) {
-			const prev = document.getElementById(topVideo);
-			const next = document.getElementById(newTop);
-
-			if (prev) {
-				prev.classList.remove("active");
-				prev.style.zIndex = "1";
-				prev.pause();
-				prev.currentTime = 0;
-				prev.muted = true;
-			}
-
-			next.classList.add("active");
-			next.style.zIndex = "10";
-			next.muted = false;
-			next.play();
-
-			document.querySelectorAll(".video-item").forEach(v => {
-				if (v.id !== newTop) {
-					v.pause();
-					v.muted = true;
-					v.classList.remove("active");
-				}
+				sideMenu.classList.remove("open");
+				menuIcon.classList.remove("open");
 			});
+		});
 
-			topVideo = newTop;
+		function showFolders() {
+			document.getElementById("folderSelection").classList.remove("hidden");
+			document.getElementById("branded").classList.add("hidden");
+			document.getElementById("personal").classList.add("hidden");
 		}
 
-		function stopAllVideos() {
-			const videos = document.querySelectorAll(".video-item");
-			videos.forEach(video => {
-				video.pause();
-				video.currentTime = 0;
-				video.muted = true;
-				video.classList.remove("active");
-			});
+		let slideIndex = 0;
+
+		function openCategory(category) {
+			document.getElementById("folderSelection").classList.add("hidden");
+			document.getElementById("branded").classList.add("hidden");
+			document.getElementById("personal").classList.add("hidden");
+
+			const section = document.getElementById(category);
+			section.classList.remove("hidden");
+
+	    		slideIndex = 0;
+
+			const slides = section.querySelectorAll(".project-slide");
+			slides.forEach(s => s.classList.remove("active"));
+			if (slides[0]) slides[0].classList.add("active");
+		}
+
+		function showSlide(i) {
+			const activeCategory = document.querySelector(".category-section:not(.hidden)");
+			if (!activeCategory) return;
+
+			const slides = activeCategory.querySelectorAll(".project-slide");
+
+			slideIndex = (i + slides.length) % slides.length;
+
+			slides.forEach(s => s.classList.remove("active"));
+			slides[slideIndex].classList.add("active");
+		}
+
+		function nextSlide() {
+			const activeCategory = document.querySelector(".category-section:not(.hidden)");
+			if (!activeCategory) return;
+
+			const slides = activeCategory.querySelectorAll(".project-slide");
+
+			slideIndex = (slideIndex + 1) % slides.length;
+			showSlide(slideIndex);
+		}
+
+		function prevSlide() {
+			const activeCategory = document.querySelector(".category-section:not(.hidden)");
+			if (!activeCategory) return;
+
+			const slides = activeCategory.querySelectorAll(".project-slide");
+
+			slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+			showSlide(slideIndex);
 		}
 	</script>
-
 </body>
 </html>
