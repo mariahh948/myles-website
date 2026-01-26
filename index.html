@@ -402,6 +402,22 @@
     }
 }
 
+/* ABOUT PAGE FILM STRIP */
+.about-film-strip {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.about-film-strip img {
+    width: 90%;
+    max-width: 900px;   /* keeps it large but not too large */
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.5));
+}
 
 
 
@@ -450,11 +466,11 @@
 			<h3>Welcome to</h3>
 			<h1>MBEEZY MEDIA</h1>
 			<p>Click the menu icon to explore!</p> <br>
-			<img src="logo.JPG" alt="MBEEZY MEDIA Logo" class="logo-home">
+			<img src="logo.jpg" alt="MBEEZY MEDIA Logo" class="logo-home">
 		</div>
 
 		<div id="about" class="hidden section">
-			<img src="logo.JPG" alt="Logo" class="logo-small">
+			<img src="logo.jpg" alt="Logo" class="logo-small">
 			<h1> About Me</h1>
 	
 			<div class="about-container">
@@ -463,11 +479,14 @@
 					What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
 				</p>
 			</div>
-			
+			<div class="about-film-strip">
+    <img src="Serpentine Film Strip Design.png" alt="Film Strip">
+</div>
+
 		</div>
 
 		<div id="works" class="hidden section">
-			<img src="logo.JPG" class="logo-small">
+			<img src="logo.jpg" class="logo-small">
 			<h1>Sample Works</h1>
 			<p>
 				Here are a few examples of my recent projects. Click "View Project" to see more!
@@ -486,6 +505,20 @@
 						<div class="folder-shape"></div>
 					</div>
 					<div class="folder-label">Personal Projects</div>
+				</div>
+
+				<div class="folder-set" onclick="openCategory('interviews')">
+					<div class="folder-icon">
+						<div class="folder-shape"></div>
+					</div>
+					<div class="folder-label">Interviews</div>
+				</div>
+
+				<div class="folder-set" onclick="openCategory('podcasts')">
+					<div class="folder-icon">
+						<div class="folder-shape"></div>
+					</div>
+					<div class="folder-label">Podcasts</div>
 				</div>
 			</div>
 
@@ -533,6 +566,35 @@
 						<a href="homie_hangout2.html" class="view-btn">View Project</a>
 					</div>
 
+
+					<button class="arrow left" onclick="prevSlide()">❮</button>
+					<button class="arrow right" onclick="nextSlide()">❯</button>
+				</section>
+			</div>
+
+			<div id="interviews" class="hidden category-section">
+				<button class="back-btn" onclick="showFolders()">← Back to Folders</button>
+			
+				<section class="project-slider">
+					<div class="project-slide active">
+						<img class="slide-img" src="dmp_thumbnail.png" alt="Interview1">
+						<h1 class="slide-title">DMP Interview</h1>
+						<a href="dmp_interview.html" class="view-btn">View Project</a>
+					</div>
+
+					<button class="arrow left" onclick="prevSlide()">❮</button>
+					<button class="arrow right" onclick="nextSlide()">❯</button>
+				</section>
+			</div>
+
+			<div id="podcasts" class="hidden category-section">
+				<button class="back-btn" onclick="showFolders()">← Back to Folders</button>
+				<section class="project-slider">
+					<div class="project-slide active">
+						<img class="slide-img" src="do_you.png" alt="Podcast1">
+						<h1 class="slide-title">Do You Need That</h1>
+						<a href="doyou.html" class="view-btn">View Project</a>
+					</div>
 
 					<button class="arrow left" onclick="prevSlide()">❮</button>
 					<button class="arrow right" onclick="nextSlide()">❯</button>
@@ -609,8 +671,17 @@
 
 		function showFolders() {
 			document.getElementById("folderSelection").classList.remove("hidden");
+
+			document.querySelectorAll(".category-section").forEach(section => {
+				section.classList.add("hidden");
+			});
+
+		/*
 			document.getElementById("branded").classList.add("hidden");
 			document.getElementById("personal").classList.add("hidden");
+			document.getElementById("interviews").classList.add("hidden");
+			document.getElementById("podcasts").classList.add("hidden");
+		*/
 		}
 
 		let slideIndex = 0;
@@ -663,4 +734,5 @@
 		}
 	</script>
 </body>
+</html>
 </html>
