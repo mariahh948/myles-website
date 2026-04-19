@@ -148,11 +148,13 @@
 				gap: 70px;
 				text-align: center;
 				margin-top: 50px;
+				flex-wrap: wrap;
 			}
 
 			.folder-set {
 				cursor: pointer;
 				transition: transform .25s ease, box-shadow .25s ease;
+				width: 180px;
 			}
 
 			.folder-set:hover {
@@ -402,7 +404,7 @@
     }
 }
 
-/* ABOUT PAGE FILM STRIP */
+/* ABOUT PAGE FILM STRIP 
 .about-film-strip {
     width: 100%;
     display: flex;
@@ -417,7 +419,7 @@
     object-fit: contain;
     display: block;
     filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.5));
-}
+}*/
 
 
 
@@ -466,11 +468,11 @@
 			<h3>Welcome to</h3>
 			<h1>MBEEZY MEDIA</h1>
 			<p>Click the menu icon to explore!</p> <br>
-			<img src="logo.JPG" alt="MBEEZY MEDIA Logo" class="logo-home">
+			<img src="logo.jpg" alt="MBEEZY MEDIA Logo" class="logo-home">
 		</div>
 
 		<div id="about" class="hidden section">
-			<img src="logo.JPG" alt="Logo" class="logo-small">
+			<img src="logo.jpg" alt="Logo" class="logo-small">
 			<h1> About Me</h1>
 	
 			<div class="about-container">
@@ -479,14 +481,14 @@
 					What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
 				</p>
 			</div>
-			<div class="about-film-strip">
-    <img src="Serpentine_Film_Strip_Design.png" alt="Film Strip">
-</div>
+			<!-- <div class="about-film-strip">
+    <img src="Serpentine Film Strip Design.png" alt="Film Strip">
+</div> -->
 
 		</div>
 
 		<div id="works" class="hidden section">
-			<img src="logo.JPG" class="logo-small">
+			<img src="logo.jpg" class="logo-small">
 			<h1>Sample Works</h1>
 			<p>
 				Here are a few examples of my recent projects. Click "View Project" to see more!
@@ -520,6 +522,13 @@
 					</div>
 					<div class="folder-label">Podcasts</div>
 				</div>
+				<div class="folder-set" onclick="openCategory('pitch')">
+	<div class="folder-icon">
+		<div class="folder-shape"></div>
+	</div>
+	<div class="folder-label">Pitch Decks</div>
+				</div>
+
 			</div>
 
 			<div id="branded" class="hidden category-section">
@@ -599,6 +608,21 @@
 					<button class="arrow left" onclick="prevSlide()">❮</button>
 					<button class="arrow right" onclick="nextSlide()">❯</button>
 				</section>
+			</div>
+
+			<div id="pitch" class="hidden category-section">
+	<button class="back-btn" onclick="showFolders()">← Back to Folders</button>
+
+	<section class="project-slider">
+		<div class="project-slide active">
+			<img class="slide-img" src="pitch1.png" alt="Pitch Deck 1">
+			<h1 class="slide-title">Project Pitch Deck</h1>
+			<a href="pitch1.html" class="view-btn">View Project</a>
+		</div>
+
+		<button class="arrow left" onclick="prevSlide()">❮</button>
+		<button class="arrow right" onclick="nextSlide()">❯</button>
+	</section>
 			</div>
 		</div>
 
@@ -686,7 +710,7 @@
 
 		let slideIndex = 0;
 
-		function openCategory(category) {
+		/*function openCategory(category) {
 			document.getElementById("folderSelection").classList.add("hidden");
 			document.getElementById("branded").classList.add("hidden");
 			document.getElementById("personal").classList.add("hidden");
@@ -695,6 +719,22 @@
 			section.classList.remove("hidden");
 
 	    		slideIndex = 0;
+
+			const slides = section.querySelectorAll(".project-slide");
+			slides.forEach(s => s.classList.remove("active"));
+			if (slides[0]) slides[0].classList.add("active");
+		}*/
+		function openCategory(category) {
+			document.getElementById("folderSelection").classList.add("hidden");
+
+			document.querySelectorAll(".category-section").forEach(section => {
+				section.classList.add("hidden");
+			});
+
+			const section = document.getElementById(category);
+			section.classList.remove("hidden");
+
+			slideIndex = 0;
 
 			const slides = section.querySelectorAll(".project-slide");
 			slides.forEach(s => s.classList.remove("active"));
