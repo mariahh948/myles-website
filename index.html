@@ -444,6 +444,41 @@
 				}
 			}
 
+			.resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-modal iframe {
+    width: 90%;
+    height: 90%;
+    border: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+}
+
+.about-container .view-btn {
+    position: static;  
+    margin-top: 15px;
+}
+
 		</style>
 
 	</head>
@@ -477,9 +512,14 @@
 	
 			<div class="about-container">
 				<img src="Headshot.jpg" alt="Professional Photo" class="professional-photo">
-				<p>
-					What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
-				</p>
+				<div>
+					<p>
+						What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
+					</p>
+
+					<br>
+					<button onclick="openResume()" class="view-btn">View Resume</button>
+				</div>
 			</div>
 			<!-- <div class="about-film-strip">
     <img src="Serpentine Film Strip Design.png" alt="Film Strip">
@@ -784,6 +824,14 @@
 			slideIndex = (slideIndex - 1 + slides.length) % slides.length;
 			showSlide(slideIndex);
 		}
+
+		function openResume() {
+    document.getElementById("resumeModal").classList.remove("hidden");
+}
+
+function closeResume() {
+    document.getElementById("resumeModal").classList.add("hidden");
+}
 	</script>
 </body>
 </html>
