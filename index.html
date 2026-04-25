@@ -475,7 +475,7 @@
 }
 
 .about-container .view-btn {
-    position: static;  
+    position: static;   /* removes absolute positioning */
     margin-top: 15px;
 }
 
@@ -514,7 +514,8 @@
 				<img src="Headshot.jpg" alt="Professional Photo" class="professional-photo">
 				<div>
 					<p>
-						What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
+					What's up! I am Myles, the founder of Mbeezy Media. I've always loved the creative space and have tried to immerse myself in various forms of art and media. I grew up in the church, where I found my love for videography. I started my journey by recording, editing, and creating graphics of the church service then I eventually branched off into other things. Nowadays, I work with music artists, podcasters, business owners, and create mock commercials. My goal is to help everyone succeed and reach their audience through the various means of media.
+
 					</p>
 
 					<br>
@@ -586,7 +587,7 @@
 					<h1 class="slide-title">Adidas Mock Ad</h1>
 					<a href="adidas_ad.html" class="view-btn">View Project</a>
 				</div>
-
+				
 				<div class="project-slide">
 	<img class="slide-img" src="promo3thumbnail.png" alt="Branded Project 3">
 	<h1 class="slide-title">LY Promo 3</h1>
@@ -668,7 +669,7 @@
 	<section class="project-slider">
 		<div class="project-slide active">
 			<img class="slide-img" src="pitch1.png" alt="Pitch Deck 1">
-			<h1 class="slide-title">AOB Pitch</h1>
+			<h1 class="slide-title">Project Pitch Deck</h1>
 			<a href="pitch1.html" class="view-btn">View Project</a>
 		</div>
 
@@ -679,7 +680,7 @@
 		</div>
 
 		<div id="contact" class="hidden">
-    <img src="logo.jpg" alt="Logo" class="logo-small">
+    <img src="logo.JPG" alt="Logo" class="logo-small">
     <h1>Get in touch</h1>
     
     <div class="contact-wrapper">
@@ -711,6 +712,11 @@
 </div>
 
 	</div>
+
+	<div id="resumeModal" class="hidden resume-modal">
+    <span class="close-btn" onclick="closeResume()">✕</span>
+    <iframe src="Myles%20Bradley%20Resume.pdf"></iframe>
+</div>
 
 	<script>
 		const menuIcon = document.getElementById("menuIcon");
@@ -823,6 +829,7 @@
 
 			slideIndex = (slideIndex - 1 + slides.length) % slides.length;
 			showSlide(slideIndex);
+
 		}
 
 		function openResume() {
